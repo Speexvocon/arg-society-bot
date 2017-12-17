@@ -1,1 +1,1 @@
-ARGSB
+Install and run "npm install" and fill out config.json

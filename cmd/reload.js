@@ -1,0 +1,36 @@
+exports.run = (bot, msg, params) => {
+  let command;
+  if (bot.commands.has(params[0])) {
+    command = params[0];
+  } else if (bot.aliases.has(params[0])) {
+    command = bot.aliases.get(params[0]);
+  }
+  if (!command) {
+    return msg.channel.send(`I cannot find the command: ${params[0]}`);
+  } else {
+    msg.channel.send(`Reloading: ${command}`)
+    .then(m => {
+      bot.reload(command)
+      .then(() => {
+        m.edit(`Successfully reloaded: ${command}`);
+      })
+      .catch(e => {
+        m.edit(`Command reload failed: ${command}\n\`\`\`${e.stack}\`\`\``);
+      });
+    });
+  }
+};
+
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["r"],
+  permLevel: 4,
+  category: "Other"
+};
+
+exports.help = {
+  name: "reload",
+  description: "Reloads the command file for changes.",
+  usage: "reload <commandname>"
+};

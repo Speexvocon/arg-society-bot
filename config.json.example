@@ -1,0 +1,5 @@
+{
+  "botToken": "TOKEN",
+  "owners" :  ["OWNER ID"],
+  "prefix": "PREIFX"
+}
